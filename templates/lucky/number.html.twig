@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Your lucky number is {{ number }}</h2>
+
+    <a href="{{ path('app_lucky_number') }}">Get another number</a>
+{% endblock %}
+
+{% block title %}Lucky Number{% endblock %}
+
