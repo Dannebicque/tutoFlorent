@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Formulaire nouveau poste</h1>
+    {%  form_theme form "bootstrap_5_layout.html.twig" %}
+    {{ form_start(form) }}
+    {{ form_row(form) }}
+    <input type="submit" value="Ajouter" />
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

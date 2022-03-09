@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+<h1>{{ categorie.libelle }}</h1>
+    {% for post in posts %}
+    <div>
+        <p>{{ post.titre }}</p>
+        <p>{{ post.datepublication|date('d/m/Y H:i') }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

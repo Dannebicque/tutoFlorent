@@ -63,4 +63,15 @@ class LuckyController extends AbstractController
             'request' => $request
         ]);
     }
+
+    /**
+     * @Route("/page", defaults={"page": "nopage"}, name="blog_index")
+     * @Route("/page/{page}", name="blog_index")
+     */
+    public function indexAction($page)
+    {
+        echo $page;
+
+        return $this->redirectToRoute('route_redirection');
+    }
 }
