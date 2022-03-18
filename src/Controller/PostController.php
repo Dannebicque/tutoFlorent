@@ -36,27 +36,18 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/category/{categorie}', name: 'app_category')]
-    public function index(Category  $categorie)
+    #[Route('/post/show', name: 'post_show')]
+    public function show(Request $request, PostRepository $postRepository)
     {
-        $posts = $categorie->getPosts();
+        $post = $postRepository->find($request->query->get('id'));
 
-        return $this->render('category/index.html.twig', [
-            'categorie' => $categorie,
-            'posts' => $posts
+        return $this->json([
+            'id' => $post->getId(),
+            'titre' => $post->getTitre(),
+            'date' => $post->getDatepublication()->format('d/m/Y'),
+            'category' => $post->getCategory()->getLibelle()
         ]);
     }
 
 
-
-//    #[Route('/category2/{categorie}', name: 'app_category_2')]
-//    public function index2(PostRepository $postRepository,  $category)
-//    {
-//        $posts = $postRepository->findBy(['category' => $category]);
-//
-//        return $this->render('category/index.html.twig', [
-//            'category' => $category,
-//            'posts' => $posts
-//        ]);
-//    }
 }

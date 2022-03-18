@@ -2,12 +2,50 @@
 
 {% block title %}Hello CategoryController!{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        .terrain {
+            height: 100px;
+            width: 100px;
+        }
+        .active {
+            background-color: red;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-<h1>{{ categorie.libelle }}</h1>
+    {% for category in categories %}
+        <div>
+            <h1>{{ category.libelle }}</h1>
+            <div id="{{ category.libelle }}" class="terrain"></div>
+        </div>
+    {% endfor %}
+    <h1>{{ categorie.libelle }}</h1>
     {% for post in posts %}
-    <div>
-        <p>{{ post.titre }}</p>
-        <p>{{ post.datepublication|date('d/m/Y H:i') }}</p>
-    </div>
-{% endfor %}
+        <button class="carte" data-post="{{ post.id }}">Click me</button>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+      $(document).ready(function () {
+        console.log('coucou')
+        $(document).on('click', '.carte', function () {
+          console.log('post id: ' + $(this).data('post'))
+          $.ajax({
+            url: "{{ path('post_show') }}",
+            data: {
+              id: $(this).data('post')
+            },
+            type: 'GET',
+            success: function (data) {
+              console.log(data.category)
+              $('.terrain').removeClass('active')
+              $('#' + data.category).addClass('active')
+            }
+          })
+        })
+      })
+    </script>
 {% endblock %}
